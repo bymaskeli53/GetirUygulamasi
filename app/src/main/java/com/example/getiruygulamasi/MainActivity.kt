@@ -30,7 +30,17 @@ class MainActivity : AppCompatActivity() {
         binding.viewPager.adapter = adapter
 
         TabLayoutMediator(tabLayout, binding.viewPager) { tab, position ->
-            tab.text = "default"
+            when (position) {
+                0 -> {
+                    tab.text = "müdavim"
+                }
+                1 -> {
+                    tab.text = "promosyonlar"
+                }
+                2 -> {
+                    tab.text = "duyurular"
+                }
+            }
 
 
 
