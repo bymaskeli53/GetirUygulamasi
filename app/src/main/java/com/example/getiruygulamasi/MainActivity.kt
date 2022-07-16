@@ -6,31 +6,35 @@ import android.os.Bundle
 import android.text.Html
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.getiruygulamasi.databinding.ActivityMainBinding
+import com.example.getiruygulamasi.databinding.FragmentMudavimBinding
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+
         window.statusBarColor = ContextCompat.getColor(this, R.color.purple_500)
-        val text = "<font color=#FFC300>getir</font><font color=#ffffff>yemek</font>"
-        getir_title.setText(Html.fromHtml(text))
-        val bitmap = BitmapFactory.decodeResource(resources,R.drawable.getir)
-        var getirList = mutableListOf(
-            Model(bitmap,"getir bi mutluluk","getir de getirelim"),
-            Model(bitmap,"getir bi mutluluk","getir de getirelim"),
-            Model(bitmap,"getir bi mutluluk","getir de getirelim"),
-            Model(bitmap,"getir bi mutluluk","getir de getirelim"),
-            Model(bitmap,"getir bi mutluluk","getir de getirelim"),
-            Model(bitmap,"getir bi mutluluk","getir de getirelim"),
-            Model(bitmap,"getir bi mutluluk","getir de getirelim"),
-            Model(bitmap,"getir bi mutluluk","getir de getirelim"),
-            Model(bitmap,"getir bi mutluluk","getir de getirelim")
-        )
 
 
-        val adapter = GetirAdapter(getirList)
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(this)
-    }
+
+        val adapter = ViewPagerAdapter(supportFragmentManager, lifecycle)
+        binding.viewPager.adapter = adapter
+
+        TabLayoutMediator(tabLayout, binding.viewPager) { tab, position ->
+            tab.text = "default"
+
+
+
+
+    }.attach()
+}
 }
